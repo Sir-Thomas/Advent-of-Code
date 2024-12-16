@@ -14,8 +14,17 @@ pub fn process_part1(mut input: &str) -> String {
     return sum.to_string();
 }
 
-pub fn process_part2(_input: &str) -> String {
-    "works".to_string()
+pub fn process_part2(mut input: String) -> String {
+    let mut success = true;
+    while success {
+        let result = remove_conditional(&input);
+        if result.is_ok() {
+            input = result.unwrap().1;
+        } else {
+            success = false;
+        }
+    }
+    return process_part1(&input);
 }
 
 fn find_and_multiply(input: &str) -> IResult<&str, i32> {
@@ -27,4 +36,10 @@ fn find_and_multiply(input: &str) -> IResult<&str, i32> {
     let (input, _) = tag(")")(input)?;
 
     Ok((input, (x * y)))
+}
+
+fn remove_conditional(input: &str) -> IResult<&str, String> {
+    let (input, before) = take_until("don't()")(input)?;
+    let (after, _) = take_until("do()")(input)?;
+    return Ok(("", (before.to_string() + after)));
 }
