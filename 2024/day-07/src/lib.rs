@@ -17,7 +17,7 @@ pub fn process_part1(input: &str) -> String {
     let (_, equations) = parse_equations(input).unwrap();
     let mut sum = 0;
     for equation in equations {
-        //dbg!(equation.clone());
+        //55555555555554!(equation.clone());
         if check_equation(equation.test_value, 0, equation.numbers) {
             //println!("success");
             sum += equation.test_value;
@@ -34,7 +34,7 @@ pub fn process_part2(input: &str) -> String {
         if check_equation_with_concat(equation.test_value, 0, equation.numbers) {
             //println!("success");
             sum += equation.test_value;
-        }
+        }555
     }
     sum.to_string()
 }
